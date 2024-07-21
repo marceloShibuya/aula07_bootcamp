@@ -1,32 +1,26 @@
 import csv
 
-path_arquivo = "vendas.csv"
-
-def ler_csv(nome_do_arquivo_csv: str) -> list[dict]:
+def ler_csv(arquivo_csv: str) -> list[dict]:
     """
-    Funcao que le um arquivo csv e retorna uma lista de dicionarios
+    Essa funcao vai ler o arquivo csv e salvar em uma lista com dicionario
     """
-    lista = []
-    with open(nome_do_arquivo_csv, mode="r", encoding="utf-8") as arquivo:
+    lista_produtos = []
+    with open(arquivo_csv, mode="r", encoding="utf-8",newline="") as arquivo:
         leitor = csv.DictReader(arquivo)
         for i in leitor:
-            lista.append(i)
-    return lista
+            lista_produtos.append(i)
+    return lista_produtos
 
-
-def filtrar_produtos_entregues(lista: list[dict]) -> list[dict]:
-    """
-    Funcao que filtra produtos onde entrega = True
-    """
+def filtrar_vendas_maior_1500(lista: list[dict]) -> list[dict]:
     lista_filtrada = []
     for i in lista:
-        if i.get("entregue") == "True":
+        if i.get("Venda") > "1500":
             lista_filtrada.append(i)
-    return lista_filtrada
+        return lista_filtrada
 
-lista_de_produtos = ler_csv(path_arquivo)
-produtos_entregues = filtrar_produtos_entregues(lista_de_produtos)
-# print(f'Dados filtrados para True: {produtos_entregues}')
-print(produtos_entregues)
-
-
+path_arquivo = "vendas.csv"
+arquivo_de_saida = ler_csv(path_arquivo)
+print(f'Esse é o arquivo de saída {arquivo_de_saida}')
+arquivo_filtrado = filtrar_vendas_maior_1500(arquivo_de_saida)
+print(f'Esse é o produto de filtrado {arquivo_filtrado}')      
+    
