@@ -14,9 +14,9 @@ def ler_csv(arquivo_csv: str) -> list[dict]:
 def filtrar_vendas_maior_1500(lista: list[dict]) -> list[dict]:
     lista_filtrada = []
     for i in lista:
-        if i.get("Venda") > "1500":
+        if int(i.get("Quantidade")) == int("20"):
             lista_filtrada.append(i)
-        return lista_filtrada
+    return lista_filtrada
 
 path_arquivo = "vendas.csv"
 arquivo_de_saida = ler_csv(path_arquivo)
